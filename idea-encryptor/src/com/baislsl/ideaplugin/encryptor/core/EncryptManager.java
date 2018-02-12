@@ -8,7 +8,7 @@ import java.util.Objects;
 import java.util.stream.Collectors;
 
 public class EncryptManager {
-    private String password;
+    private String key;
     private EncryptMethod method;
     private static List<Encryptor> encryptors;
 
@@ -22,12 +22,12 @@ public class EncryptManager {
         this.method = EncryptMethod.NATIVE_ENCODER;
     }
 
-    public boolean setPassword(String password) {
-        this.password = password;
+    public boolean setKey(String key) {
+        this.key = key;
         if (getEncoder() == null) {
             return true;
         }
-        return getEncoder().isLegalPassword(password);
+        return getEncoder().isLegalKey(key);
     }
 
     public void setEncodeMethod(EncryptMethod method) {
@@ -36,11 +36,11 @@ public class EncryptManager {
     }
 
     public String encode(String s) {
-        return getEncoder().encode(s, password);
+        return getEncoder().encode(s, key);
     }
 
     public String decode(String s) {
-        return getEncoder().decode(s, password);
+        return getEncoder().decode(s, key);
     }
 
     public Encryptor getEncoder() {

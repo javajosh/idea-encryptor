@@ -5,22 +5,22 @@ public interface Encryptor {
     /**
      *
      * @param plaintext
-     * @param password
+     * @param key
      * @return
      */
-    String encode(String plaintext, String password);
+    String encode(String plaintext, String key);
 
 
     /**
      *
      * @param ciphertext
-     * @param password
+     * @param key
      * @return
      */
-    String decode(String ciphertext, String password);
+    String decode(String ciphertext, String key);
 
     boolean detect(String ciphertext);
 
-    boolean isLegalPassword(String password);
+    boolean isLegalKey(String key);
 
 }

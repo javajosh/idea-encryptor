@@ -14,17 +14,17 @@ public class NativeEncryptor implements Encryptor {
     }
 
     @Override
-    public String encode(String plaintext, String password) {
+    public String encode(String plaintext, String key) {
         return HEADER + plaintext;
     }
 
     @Override
-    public String decode(String ciphertext, String password) {
+    public String decode(String ciphertext, String key) {
         return ciphertext.substring(HEADER.length());
     }
 
     @Override
-    public boolean isLegalPassword(String password) {
+    public boolean isLegalKey(String key) {
         return true;
     }
 }
