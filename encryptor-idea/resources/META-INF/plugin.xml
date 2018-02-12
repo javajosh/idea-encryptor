@@ -1,0 +1,44 @@
+<idea-plugin>
+  <id>com.baislsl.ideaplugin.encryptor</id>
+  <name>Baislsl</name>
+  <version>1.0</version>
+  <vendor email="baislsl666@gmail.com" url="https://github.com/baislsl">baislsl</vendor>
+
+  <description><![CDATA[
+      Enter short description for your plugin here.<br>
+      <em>most HTML tags may be used</em>
+    ]]></description>
+
+  <change-notes><![CDATA[
+      Add change notes here.<br>
+      <em>most HTML tags may be used</em>
+    ]]>
+  </change-notes>
+
+  <!-- please see http://www.jetbrains.org/intellij/sdk/docs/basics/getting_started/build_number_ranges.html for description -->
+  <idea-version since-build="173.0"/>
+
+  <!-- please see http://www.jetbrains.org/intellij/sdk/docs/basics/getting_started/plugin_compatibility.html
+       on how to target different products -->
+  <!-- uncomment to enable plugin in all products
+  <depends>com.intellij.modules.lang</depends>
+  -->
+
+  <extensions defaultExtensionNs="com.intellij">
+    <!-- Add your extensions here -->
+  </extensions>
+
+  <actions>
+    <!-- Add your actions here -->
+    <group id="MyPlugin.SampleMenu" text="new _Sample Menu" description="Sample menu">
+      <add-to-group group-id="MainMenu" anchor="last"  />
+      <action id="Myplugin.Textboxes" class="com.baislsl.ideaplugin.encryptor.TextBoxes" text="Text _Boxes" description="A test menu item" />
+      <!--<action id="Myplugin.Dialogs" class="Mypackage.MyShowDialog" text="Show _Dialog" description="A test menu item" />-->
+    </group>
+    <action id="baislsl" class="com.baislsl.ideaplugin.encryptor.MyAction" text="MyActionName" description="My action">
+      <add-to-group group-id="AnalyzeActions" anchor="first"/>
+      <keyboard-shortcut keymap="$default" first-keystroke="shift ctrl alt B"/>
+    </action>
+  </actions>
+
+</idea-plugin>

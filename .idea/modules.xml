@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/encryptor.iml" filepath="$PROJECT_DIR$/encryptor.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/encryptor_main.iml" filepath="$PROJECT_DIR$/.idea/modules/encryptor_main.iml" group="encryptor" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/encryptor_test.iml" filepath="$PROJECT_DIR$/.idea/modules/encryptor_test.iml" group="encryptor" />
+      <module fileurl="file://$PROJECT_DIR$/idea-encryptor/idea-encryptor.iml" filepath="$PROJECT_DIR$/idea-encryptor/idea-encryptor.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/idea-encrytor/idea-encrytor.iml" filepath="$PROJECT_DIR$/.idea/modules/idea-encrytor/idea-encrytor.iml" group="idea-encrytor" />
+    </modules>
+  </component>
+</project>
