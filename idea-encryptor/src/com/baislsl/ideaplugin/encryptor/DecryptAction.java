@@ -25,7 +25,8 @@ public class DecryptAction extends AnAction {
         LOG.info(document.getText());
 
         EncryptManager encryptManager = new EncryptManager();
-        encryptManager.setEncodeMethod(EncryptMethod.NATIVE_ENCODER);
+        String key = Messages.showInputDialog(project, "Input your key", "Key", Messages.getQuestionIcon());
+        encryptManager.setKey(key);
         document.setText(encryptManager.decode(document.getText()));
     }
 }

@@ -8,6 +8,7 @@ import com.intellij.openapi.actionSystem.AnActionEvent;
 import com.intellij.openapi.actionSystem.PlatformDataKeys;
 import com.intellij.openapi.editor.Document;
 import com.intellij.openapi.project.Project;
+import com.intellij.openapi.ui.Messages;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -24,7 +25,8 @@ public class EncryptAction extends AnAction {
         LOG.info(document.getText());
 
         EncryptManager encryptManager = new EncryptManager();
-        encryptManager.setEncodeMethod(EncryptMethod.NATIVE_ENCODER);
+        String key = Messages.showInputDialog(project, "Input your key", "Key", Messages.getQuestionIcon());
+        encryptManager.setKey(key);
         document.setText(encryptManager.encode(document.getText()));
     }
 }

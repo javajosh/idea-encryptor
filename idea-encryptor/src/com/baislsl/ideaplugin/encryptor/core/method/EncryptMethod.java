@@ -5,7 +5,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 public enum EncryptMethod {
-    NATIVE_ENCODER(NativeEncryptor.class);
+    NATIVE_ENCODER(NativeEncryptor.class),
+    AES_ENCODER(AESEncryptor.class);
 
 
     private Class<?> clazz;
