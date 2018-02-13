@@ -1,8 +1,10 @@
 package com.baislsl.ideaplugin.encryptor.ui;
 
+import com.baislsl.ideaplugin.encryptor.action.MethodReceiver;
 import com.baislsl.ideaplugin.encryptor.core.EncryptManager;
 import com.baislsl.ideaplugin.encryptor.core.method.EncryptMethod;
 import com.intellij.openapi.actionSystem.PlatformDataKeys;
+import com.intellij.openapi.command.WriteCommandAction;
 import com.intellij.openapi.editor.Document;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.ui.Messages;
@@ -16,11 +18,13 @@ public class EncryptMethodPopup extends BaseListPopupStep<EncryptMethod> {
     private EncryptMethod method;
     private Project project;
     private Document document;
+    private MethodReceiver receiver;
 
-    public EncryptMethodPopup(Project project, Document document) {
+    public EncryptMethodPopup(Project project, Document document, MethodReceiver receiver) {
         super("Encrpt Or Decrypt Method", EncryptMethod.values());
         this.project = project;
         this.document = document;
+        this.receiver = receiver;
     }
 
     @NotNull
@@ -31,9 +35,7 @@ public class EncryptMethodPopup extends BaseListPopupStep<EncryptMethod> {
 
     @Override
     public PopupStep onChosen(EncryptMethod selectedValue, boolean finalChoice) {
-        if (finalChoice) {
-            onCreateKeyInputMessages(selectedValue);
-        }
+        method = selectedValue;
         return super.onChosen(selectedValue, finalChoice);
     }
 
@@ -41,14 +43,8 @@ public class EncryptMethodPopup extends BaseListPopupStep<EncryptMethod> {
         return method;
     }
 
-    private void onCreateKeyInputMessages(EncryptMethod method) {
-        EncryptManager encryptManager = new EncryptManager();
-        Objects.requireNonNull(document);
-        String key = Messages.showInputDialog(project,
-                "Input your key",
-                "Key",
-                Messages.getQuestionIcon());
-        encryptManager.setKey(key);
-        document.setText(encryptManager.encode(document.getText()));
+    @Override
+    public Runnable getFinalRunnable() {
+        return () -> receiver.accept(method);
     }
 }
