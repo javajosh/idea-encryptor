@@ -1,5 +1,6 @@
 package com.baislsl.ideaplugin.encryptor.detect;
 
+import com.baislsl.ideaplugin.encryptor.action.DecryptAction;
 import com.baislsl.ideaplugin.encryptor.core.EncryptManager;
 import com.baislsl.ideaplugin.encryptor.core.method.EncryptMethod;
 import com.baislsl.ideaplugin.encryptor.ui.DetectConfirmDialog;
@@ -9,6 +10,7 @@ import com.intellij.openapi.editor.Document;
 import com.intellij.openapi.fileEditor.FileDocumentManager;
 import com.intellij.openapi.fileEditor.FileEditorManager;
 import com.intellij.openapi.fileEditor.FileEditorManagerListener;
+import com.intellij.openapi.project.Project;
 import com.intellij.openapi.project.ProjectManager;
 import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.util.messages.MessageBus;
@@ -31,13 +33,14 @@ public class FileOpenDetector implements ProjectComponent {
             @Override
             public void fileOpened(@NotNull FileEditorManager source, @NotNull VirtualFile file) {
                 Document document = FileDocumentManager.getInstance().getDocument(file);
+                Project project = ProjectManager.getInstance().getDefaultProject();
                 EncryptMethod method = manager.detect(document.getText());
                 if (method != null) {
-                    int exitCode = openConfirmDialog(file.getPath());
+                    int exitCode = openConfirmDialog(file.getPath(), project);
                     LOG.debug("Exit Code = {}", exitCode);
                     if (exitCode == DetectConfirmDialog.USE_EXIT_CODE) {
                         LOG.info("detect" + method);
-                        openDecryptWindow(method);
+                        openDecryptWindow(method, project,  document);
                     }
 
                 }
@@ -50,16 +53,19 @@ public class FileOpenDetector implements ProjectComponent {
         connection.disconnect();
     }
 
-    private int openConfirmDialog(String filePath) {
+    private int openConfirmDialog(String filePath, Project project) {
         DetectConfirmDialog dialog = new DetectConfirmDialog(
-                ProjectManager.getInstance().getDefaultProject(),
+                project,
                 "The file " + filePath + " seems to be encrypt by Encrypt Tool. Use" +
                         "Encrypt Tool to decrypt it ?");
         dialog.show();
         return dialog.getExitCode();
     }
 
-    private void openDecryptWindow(EncryptMethod method) {
-        // TODO:
+    private void openDecryptWindow(EncryptMethod method, Project project, Document document) {
+        DecryptAction action = new DecryptAction();
+        action.setDocument(document);
+        action.setProject(project);
+        action.accept(method);
     }
 }

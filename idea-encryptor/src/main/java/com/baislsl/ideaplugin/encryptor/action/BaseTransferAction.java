@@ -2,6 +2,7 @@ package com.baislsl.ideaplugin.encryptor.action;
 
 import com.baislsl.ideaplugin.encryptor.core.method.EncryptMethod;
 import com.baislsl.ideaplugin.encryptor.ui.EncryptMethodPopup;
+import com.baislsl.ideaplugin.encryptor.ui.KeyQueryDialog;
 import com.intellij.openapi.actionSystem.AnAction;
 import com.intellij.openapi.actionSystem.AnActionEvent;
 import com.intellij.openapi.actionSystem.PlatformDataKeys;
@@ -22,10 +23,12 @@ public abstract class BaseTransferAction extends AnAction implements MethodRecei
 
     @Override
     public void actionPerformed(AnActionEvent anActionEvent) {
-        project = anActionEvent.getProject();
-        document = anActionEvent.getData(PlatformDataKeys.EDITOR).getDocument();
-        Objects.requireNonNull(document);
+        conduct(anActionEvent.getProject(), anActionEvent.getData(PlatformDataKeys.EDITOR).getDocument());
+    }
 
+    public void conduct(Project project, Document document) {
+        this.project = project;
+        this.document = document;
         JBPopupFactory factory = JBPopupFactory.getInstance();
         EncryptMethodPopup item = new EncryptMethodPopup(project, document, this);
         ListPopup popup = factory.createListPopup(item);
@@ -35,16 +38,22 @@ public abstract class BaseTransferAction extends AnAction implements MethodRecei
     @Override
     public void accept(EncryptMethod method) {
         this.method = method;
-        this.key = getInputKey();
+        this.key = new KeyQueryDialog(project).getKey();
         conductTransfer();
     }
 
-    private String getInputKey() {
-        return Messages.showInputDialog(project,
-                "Input your key",
-                "Key",
-                Messages.getQuestionIcon());
-    }
 
     protected abstract void conductTransfer();
+
+    public void setProject(Project project) {
+        this.project = project;
+    }
+
+    public void setMethod(EncryptMethod method) {
+        this.method = method;
+    }
+
+    public void setDocument(Document document) {
+        this.document = document;
+    }
 }
