@@ -13,6 +13,7 @@ import javax.crypto.spec.SecretKeySpec;
 public class AESEncryptor implements Encryptor {
     private final static Logger LOG = LoggerFactory.getLogger(AESEncryptor.class);
     private final static String ENCRYPT_VECTOR = "plugin@baislsl--";
+    private final static String CIPHER_METHOD = "AES/CBC/PKCS5PADDING";
 
     @Override
     public String encode(String plaintext, String key) {
@@ -20,7 +21,7 @@ public class AESEncryptor implements Encryptor {
         SecretKeySpec keySpec = new SecretKeySpec(raw, "AES");
 
         try {
-            Cipher cipher = Cipher.getInstance("AES/CBC/PKCS5PADDING");
+            Cipher cipher = Cipher.getInstance(CIPHER_METHOD);
 
             IvParameterSpec iv = new IvParameterSpec(ENCRYPT_VECTOR.getBytes());
             cipher.init(Cipher.ENCRYPT_MODE, keySpec, iv);
@@ -39,7 +40,7 @@ public class AESEncryptor implements Encryptor {
             IvParameterSpec iv = new IvParameterSpec(ENCRYPT_VECTOR.getBytes("UTF-8"));
             SecretKeySpec keySpec = new SecretKeySpec(key.getBytes("UTF-8"), "AES");
 
-            Cipher cipher = Cipher.getInstance("AES/CBC/PKCS5PADDING");
+            Cipher cipher = Cipher.getInstance(CIPHER_METHOD);
             cipher.init(Cipher.DECRYPT_MODE, keySpec, iv);
             byte[] plaintext = cipher.doFinal(Base64.decodeBase64(ciphertext));
             return new String(plaintext);
