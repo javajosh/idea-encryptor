@@ -12,8 +12,6 @@ import com.intellij.openapi.ui.popup.PopupStep;
 import com.intellij.openapi.ui.popup.util.BaseListPopupStep;
 import org.jetbrains.annotations.NotNull;
 
-import java.util.Objects;
-
 public class EncryptMethodPopup extends BaseListPopupStep<EncryptMethod> {
     private EncryptMethod method;
     private Project project;
