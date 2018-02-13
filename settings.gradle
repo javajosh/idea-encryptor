@@ -15,5 +15,5 @@ include 'api'
 include 'services:webservice'
 */
 
-rootProject.name = 'encryptor'
+rootProject.name = 'com.baislsl.ideaplugin.encryptor'
 include 'idea-encrytor'
