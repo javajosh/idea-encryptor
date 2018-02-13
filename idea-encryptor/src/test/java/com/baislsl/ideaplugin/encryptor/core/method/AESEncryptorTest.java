@@ -28,4 +28,14 @@ public class AESEncryptorTest {
         assertFalse(encryptor.isLegalKey(null));
         assertFalse(encryptor.isLegalKey("12345678"));
     }
+
+    @Test
+    public void headerTest() {
+        AESEncryptor encryptor = new AESEncryptor();
+        String plaintext = "This a a naive project by baislsl";
+        String key = "0123456789abcdef";
+
+        String ciphertext = encryptor.encode(plaintext, key);
+        assertTrue(encryptor.detect(ciphertext));
+    }
 }

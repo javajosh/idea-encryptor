@@ -14,6 +14,7 @@ public class AESEncryptor implements Encryptor {
     private final static Logger LOG = LoggerFactory.getLogger(AESEncryptor.class);
     private final static String ENCRYPT_VECTOR = "plugin@baislsl--";
     private final static String CIPHER_METHOD = "AES/CBC/PKCS5PADDING";
+    private final static String HEADER = ".https://github.com/baislsl@idea-plugin/AES";
 
     @Override
     public String encode(String plaintext, String key) {
@@ -27,7 +28,7 @@ public class AESEncryptor implements Encryptor {
             cipher.init(Cipher.ENCRYPT_MODE, keySpec, iv);
             byte[] encrypted = cipher.doFinal(plaintext.getBytes());
 
-            return new BASE64Encoder().encode(encrypted);
+            return HEADER + new BASE64Encoder().encode(encrypted);
         } catch (Exception e) {
             LOG.error("encrypt error", e);
             return plaintext;
@@ -36,6 +37,10 @@ public class AESEncryptor implements Encryptor {
 
     @Override
     public String decode(String ciphertext, String key) {
+        if(!HEADER.equals(ciphertext.substring(0, HEADER.length()))){
+            return ciphertext;
+        }
+        ciphertext = ciphertext.substring(HEADER.length());
         try {
             IvParameterSpec iv = new IvParameterSpec(ENCRYPT_VECTOR.getBytes("UTF-8"));
             SecretKeySpec keySpec = new SecretKeySpec(key.getBytes("UTF-8"), "AES");
@@ -52,7 +57,7 @@ public class AESEncryptor implements Encryptor {
 
     @Override
     public boolean detect(String ciphertext) {
-        return false;
+        return HEADER.equals(ciphertext.substring(0, HEADER.length()));
     }
 
     @Override
