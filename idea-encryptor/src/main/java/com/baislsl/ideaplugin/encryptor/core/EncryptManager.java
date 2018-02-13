@@ -1,6 +1,7 @@
 package com.baislsl.ideaplugin.encryptor.core;
 
 import com.baislsl.ideaplugin.encryptor.core.method.EncryptMethod;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.Arrays;
 import java.util.List;
@@ -45,6 +46,15 @@ public class EncryptManager {
 
     public Encryptor getEncoder() {
         return encryptors.get(method.ordinal());
+    }
+
+    public EncryptMethod detect(@Nullable String s) {
+        if(s == null) return null;
+        for (Encryptor encryptor : encryptors) {
+            if(encryptor.detect(s))
+                return EncryptMethod.values()[encryptors.indexOf(encryptor)];
+        }
+        return null;
     }
 
 }

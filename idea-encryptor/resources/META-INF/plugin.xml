@@ -24,6 +24,12 @@
     <depends>com.intellij.modules.lang</depends>
     -->
 
+    <project-components>
+        <component>
+            <interface-class>com.baislsl.ideaplugin.encryptor.detect.FileOpenDetector</interface-class>
+            <implementation-class>com.baislsl.ideaplugin.encryptor.detect.FileOpenDetector</implementation-class>
+        </component>
+    </project-components>
     <extensions defaultExtensionNs="com.intellij">
         <!-- Add your extensions here -->
     </extensions>
