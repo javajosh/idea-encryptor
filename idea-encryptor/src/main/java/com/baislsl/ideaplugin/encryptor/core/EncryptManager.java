@@ -20,7 +20,7 @@ public class EncryptManager {
     }
 
     public EncryptManager() {
-        this.method = EncryptMethod.AES_ENCODER;
+        this.method = EncryptMethod.AES;
     }
 
     public boolean setKey(String key) {

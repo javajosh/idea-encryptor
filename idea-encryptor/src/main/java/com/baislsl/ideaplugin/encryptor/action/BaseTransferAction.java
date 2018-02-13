@@ -11,6 +11,7 @@ import com.intellij.openapi.project.Project;
 import com.intellij.openapi.ui.Messages;
 import com.intellij.openapi.ui.popup.JBPopupFactory;
 import com.intellij.openapi.ui.popup.ListPopup;
+import org.jetbrains.annotations.Nullable;
 
 import java.awt.*;
 import java.util.Objects;
@@ -36,9 +37,10 @@ public abstract class BaseTransferAction extends AnAction implements MethodRecei
     }
 
     @Override
-    public void accept(EncryptMethod method) {
+    public void accept(@Nullable EncryptMethod method) {
+        if(method == null) return;
         this.method = method;
-        this.key = new KeyQueryDialog(project).getKey();
+        this.key = new KeyQueryDialog(project, method).getKey();
         conductTransfer();
     }
 

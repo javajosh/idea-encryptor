@@ -1,4 +1,4 @@
-package com.baislsl.ideaplugin.encryptor.detect;
+package com.baislsl.ideaplugin.encryptor.component;
 
 import com.baislsl.ideaplugin.encryptor.action.DecryptAction;
 import com.baislsl.ideaplugin.encryptor.core.EncryptManager;
@@ -39,7 +39,7 @@ public class FileOpenDetector implements ProjectComponent {
                     int exitCode = openConfirmDialog(file.getPath(), project);
                     LOG.debug("Exit Code = {}", exitCode);
                     if (exitCode == DetectConfirmDialog.USE_EXIT_CODE) {
-                        LOG.info("detect" + method);
+                        LOG.info("component" + method);
                         openDecryptWindow(method, project,  document);
                     }
 
@@ -56,7 +56,7 @@ public class FileOpenDetector implements ProjectComponent {
     private int openConfirmDialog(String filePath, Project project) {
         DetectConfirmDialog dialog = new DetectConfirmDialog(
                 project,
-                "The file " + filePath + " seems to be encrypt by Encrypt Tool. Use" +
+                "The file " + filePath + " seems to be encrypt by Encrypt Tool. Use " +
                         "Encrypt Tool to decrypt it ?");
         dialog.show();
         return dialog.getExitCode();
