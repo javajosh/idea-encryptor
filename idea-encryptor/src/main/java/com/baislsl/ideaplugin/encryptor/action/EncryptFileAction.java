@@ -9,7 +9,7 @@ import com.intellij.openapi.command.WriteCommandAction;
 import com.intellij.openapi.editor.Document;
 
 
-public class EncryptAction extends AnAction {
+public class EncryptFileAction extends AnAction {
     private EncryptExecutor executor;
 
     @Override

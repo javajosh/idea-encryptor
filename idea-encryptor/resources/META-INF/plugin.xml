@@ -35,17 +35,19 @@
     </extensions>
 
     <actions>
-        <action id="Encrypt" class="com.baislsl.ideaplugin.encryptor.action.EncryptAction"
+        <action id="com.baislsl.ideaplugin.encryptor.action.EncryptFileAction"
+                class="com.baislsl.ideaplugin.encryptor.action.EncryptFileAction"
                 text="Encrypt" description="Encrypt code">
         </action>
-        <action id="Decrypt" class="com.baislsl.ideaplugin.encryptor.action.DecryptAction"
+        <action id="com.baislsl.ideaplugin.encryptor.action.DecryptFileAction"
+                class="com.baislsl.ideaplugin.encryptor.action.DecryptFileAction"
                 text="Decrypt" description="Decrypt code">
         </action>
         <group id="EncryptDecrypt" text="Encrypt Decrypt Tool"
                 description="Encrypt and Decrypt Tool List" popup="true">
             <add-to-group group-id="EditorPopupMenu" anchor="last"/>
-            <reference ref="Encrypt"/>
-            <reference ref="Decrypt"/>
+            <reference ref="com.baislsl.ideaplugin.encryptor.action.EncryptFileAction"/>
+            <reference ref="com.baislsl.ideaplugin.encryptor.action.DecryptFileAction"/>
         </group>
     </actions>
 
