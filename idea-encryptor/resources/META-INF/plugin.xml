@@ -37,18 +37,33 @@
     <actions>
         <action id="com.baislsl.ideaplugin.encryptor.action.EncryptFileAction"
                 class="com.baislsl.ideaplugin.encryptor.action.EncryptFileAction"
-                text="Encrypt" description="Encrypt code">
+                text="Encrypt Current File"
+                description="Encrypt Current File">
         </action>
         <action id="com.baislsl.ideaplugin.encryptor.action.DecryptFileAction"
                 class="com.baislsl.ideaplugin.encryptor.action.DecryptFileAction"
-                text="Decrypt" description="Decrypt code">
+                text="Decrypt Current File"
+                description="Decrypt Current File">
+        </action>
+        <action id="com.baislsl.ideaplugin.encryptor.action.EncryptSelectedAction"
+                class="com.baislsl.ideaplugin.encryptor.action.EncryptSelectedAction"
+                text="Encrypt Selected Text"
+                description="Encrypt Selected Text">
+        </action>
+        <action id="com.baislsl.ideaplugin.encryptor.action.DecryptSelectedAction"
+                class="com.baislsl.ideaplugin.encryptor.action.DecryptSelectedAction"
+                text="Decrypt Selected Text"
+                description="Decrypt Selected Text">
         </action>
         <group id="EncryptDecrypt" text="Encrypt Decrypt Tool"
                 description="Encrypt and Decrypt Tool List" popup="true">
             <add-to-group group-id="EditorPopupMenu" anchor="last"/>
             <reference ref="com.baislsl.ideaplugin.encryptor.action.EncryptFileAction"/>
             <reference ref="com.baislsl.ideaplugin.encryptor.action.DecryptFileAction"/>
+            <reference ref="com.baislsl.ideaplugin.encryptor.action.EncryptSelectedAction"/>
+            <reference ref="com.baislsl.ideaplugin.encryptor.action.DecryptSelectedAction"/>
         </group>
+
     </actions>
 
 </idea-plugin>

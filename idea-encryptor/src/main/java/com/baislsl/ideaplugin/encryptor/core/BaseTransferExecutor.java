@@ -5,6 +5,7 @@ import com.baislsl.ideaplugin.encryptor.ui.ConfigureDialog;
 import com.intellij.openapi.editor.Document;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.ui.DialogWrapper;
+import org.jetbrains.annotations.NotNull;
 
 /**
  * @see DecryptExecutor
@@ -18,7 +19,7 @@ public abstract class BaseTransferExecutor {
     protected Runnable executor;
     protected String result;
 
-    public BaseTransferExecutor(Project project, String text, Runnable executor) {
+    public BaseTransferExecutor(Project project, @NotNull String text, Runnable executor) {
         this.project = project;
         this.text = text;
         this.executor = executor;
