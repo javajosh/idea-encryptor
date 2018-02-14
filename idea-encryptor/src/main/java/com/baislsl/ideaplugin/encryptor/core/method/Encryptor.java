@@ -1,6 +1,8 @@
 package com.baislsl.ideaplugin.encryptor.core.method;
 
-public interface Encryptor {
+import com.baislsl.ideaplugin.encryptor.ui.KeyLegalDetector;
+
+public interface Encryptor extends KeyLegalDetector {
 
     /**
      *
@@ -20,7 +22,5 @@ public interface Encryptor {
     String decode(String ciphertext, String key);
 
     boolean detect(String ciphertext);
-
-    boolean isLegalKey(String key);
 
 }

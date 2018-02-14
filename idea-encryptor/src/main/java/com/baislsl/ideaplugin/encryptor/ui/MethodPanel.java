@@ -12,6 +12,7 @@ public class MethodPanel extends JComponent implements ActionListener {
     private EncryptMethod method;
     private ButtonGroup group;
     private java.util.List<JRadioButton> buttonList = new ArrayList<>();
+    private java.util.List<ActionListener> actionListeners = new ArrayList<>();
 
     public MethodPanel() {
         this.setLayout(new GridLayout(EncryptMethod.values().length, 1));
@@ -45,6 +46,16 @@ public class MethodPanel extends JComponent implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         this.method = EncryptMethod.valueOf(e.getActionCommand());
+        for (ActionListener listener : actionListeners) {
+            listener.actionPerformed(e);
+        }
+    }
 
+    public synchronized void addActionListener(ActionListener actionListener) {
+        actionListeners.add(actionListener);
+    }
+
+    public synchronized boolean removeActionListener(ActionListener actionListener) {
+        return actionListeners.remove(actionListener);
     }
 }

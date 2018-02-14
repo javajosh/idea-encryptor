@@ -36,7 +36,7 @@ public class AESEncryptor implements Encryptor {
 
     @Override
     public String decode(String ciphertext, String key) {
-        if(!HEADER.equals(ciphertext.substring(0, HEADER.length()))){
+        if(ciphertext.length() < HEADER.length() || !HEADER.equals(ciphertext.substring(0, HEADER.length()))){
             return ciphertext;
         }
         ciphertext = ciphertext.substring(HEADER.length());
@@ -56,7 +56,7 @@ public class AESEncryptor implements Encryptor {
 
     @Override
     public boolean detect(String ciphertext) {
-        return HEADER.equals(ciphertext.substring(0, HEADER.length()));
+        return ciphertext.length() >= HEADER.length() && HEADER.equals(ciphertext.substring(0, HEADER.length()));
     }
 
     @Override

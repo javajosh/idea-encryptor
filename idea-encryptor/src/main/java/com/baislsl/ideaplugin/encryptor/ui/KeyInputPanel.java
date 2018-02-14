@@ -53,4 +53,12 @@ public class KeyInputPanel extends JComponent implements ActionListener {
         }
 
     }
+
+    public synchronized void addActionListener(ActionListener listener) {
+        passwordField.addActionListener(listener);
+    }
+
+    public synchronized void removeActionListener(ActionListener listener) {
+        passwordField.removeActionListener(listener);
+    }
 }

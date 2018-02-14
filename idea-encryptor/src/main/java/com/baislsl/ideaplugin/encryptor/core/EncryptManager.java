@@ -61,6 +61,6 @@ public class EncryptManager implements KeyLegalDetector {
 
     @Override
     public boolean isLegalKey(String key) {
-        return detect(key) != null;
+        return method.getNewInstance().isLegalKey(key);
     }
 }

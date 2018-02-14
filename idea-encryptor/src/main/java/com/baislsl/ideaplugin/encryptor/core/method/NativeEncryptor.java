@@ -9,7 +9,7 @@ public class NativeEncryptor implements Encryptor {
 
     @Override
     public boolean detect(String ciphertext) {
-        return HEADER.equals(ciphertext.substring(0, HEADER.length()));
+        return ciphertext.length() >= HEADER.length() && HEADER.equals(ciphertext.substring(0, HEADER.length()));
     }
 
     @Override
