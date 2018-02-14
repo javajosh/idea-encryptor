@@ -27,6 +27,7 @@ public class MethodPanel extends JComponent implements ActionListener {
 
         // set default selection
         buttonList.get(0).setSelected(true);
+        this.method = EncryptMethod.values()[0];
     }
 
 

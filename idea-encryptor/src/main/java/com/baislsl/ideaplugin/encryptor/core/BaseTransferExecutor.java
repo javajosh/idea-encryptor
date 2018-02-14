@@ -11,14 +11,17 @@ import com.intellij.openapi.ui.DialogWrapper;
  * @see EncryptExecutor
  */
 public abstract class BaseTransferExecutor {
-    protected Document document;
+    protected String text;
     protected Project project;
     protected String key;
     protected EncryptMethod method;
+    protected Runnable executor;
+    protected String result;
 
-    public BaseTransferExecutor(Project project, Document document) {
+    public BaseTransferExecutor(Project project, String text, Runnable executor) {
         this.project = project;
-        this.document = document;
+        this.text = text;
+        this.executor = executor;
     }
 
     public void conduct() {
@@ -29,12 +32,13 @@ public abstract class BaseTransferExecutor {
         if (exitCode == DialogWrapper.OK_EXIT_CODE) {
             this.key = configureDialog.getKey();
             this.method = configureDialog.getMethod();
-            conductTransfer();
+            result = conductTransfer();
+            executor.run();
         }
     }
 
 
-    protected abstract void conductTransfer();
+    protected abstract String conductTransfer();
 
     public void setProject(Project project) {
         this.project = project;
@@ -44,8 +48,11 @@ public abstract class BaseTransferExecutor {
         this.method = method;
     }
 
-    public void setDocument(Document document) {
-        this.document = document;
+    public void setText(String text) {
+        this.text = text;
     }
 
+    public String getResult() {
+        return result;
+    }
 }

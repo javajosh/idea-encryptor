@@ -6,16 +6,15 @@ import com.intellij.openapi.project.Project;
 
 public class EncryptExecutor extends BaseTransferExecutor {
 
-    public EncryptExecutor(Project project, Document document) {
-        super(project, document);
+    public EncryptExecutor(Project project, String text, Runnable executor) {
+        super(project, text, executor);
     }
 
     @Override
-    protected void conductTransfer() {
+    protected String conductTransfer() {
         EncryptManager encryptManager = new EncryptManager();
         encryptManager.setEncodeMethod(method);
         encryptManager.setKey(key);
-        String text = encryptManager.encode(document.getText());
-        WriteCommandAction.runWriteCommandAction(project, () -> document.setText(text));
+        return encryptManager.encode(text);
     }
 }

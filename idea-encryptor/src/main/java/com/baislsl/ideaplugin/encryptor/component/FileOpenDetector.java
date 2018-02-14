@@ -5,6 +5,7 @@ import com.baislsl.ideaplugin.encryptor.core.EncryptManager;
 import com.baislsl.ideaplugin.encryptor.core.method.EncryptMethod;
 import com.baislsl.ideaplugin.encryptor.ui.DetectConfirmDialog;
 import com.intellij.openapi.application.ApplicationManager;
+import com.intellij.openapi.command.WriteCommandAction;
 import com.intellij.openapi.components.ProjectComponent;
 import com.intellij.openapi.editor.Document;
 import com.intellij.openapi.fileEditor.FileDocumentManager;
@@ -24,6 +25,7 @@ public class FileOpenDetector implements ProjectComponent {
     private final static Logger LOG = LoggerFactory.getLogger(FileOpenDetector.class);
     private MessageBusConnection connection;
     private static EncryptManager manager = new EncryptManager();
+    private DecryptExecutor executor;
 
     @Override
     public void projectOpened() {
@@ -63,7 +65,11 @@ public class FileOpenDetector implements ProjectComponent {
     }
 
     private void openDecryptWindow(EncryptMethod method, Project project, Document document) {
-        DecryptExecutor executor = new DecryptExecutor(project, document);
+        executor = new DecryptExecutor(project, document.getText(),
+                () -> WriteCommandAction.runWriteCommandAction(
+                        project,
+                        () -> document.setText(executor.getResult()))
+        );
         executor.setMethod(method);
         executor.conduct();
     }
