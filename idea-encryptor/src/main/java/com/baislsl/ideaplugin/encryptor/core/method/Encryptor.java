@@ -1,4 +1,4 @@
-package com.baislsl.ideaplugin.encryptor.core;
+package com.baislsl.ideaplugin.encryptor.core.method;
 
 public interface Encryptor {
 

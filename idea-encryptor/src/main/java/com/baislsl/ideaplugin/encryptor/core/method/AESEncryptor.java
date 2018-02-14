@@ -1,6 +1,5 @@
 package com.baislsl.ideaplugin.encryptor.core.method;
 
-import com.baislsl.ideaplugin.encryptor.core.Encryptor;
 import org.apache.commons.net.util.Base64;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

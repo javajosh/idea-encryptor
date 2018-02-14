@@ -1,6 +1,6 @@
 package com.baislsl.ideaplugin.encryptor.component;
 
-import com.baislsl.ideaplugin.encryptor.action.DecryptAction;
+import com.baislsl.ideaplugin.encryptor.core.DecryptExecutor;
 import com.baislsl.ideaplugin.encryptor.core.EncryptManager;
 import com.baislsl.ideaplugin.encryptor.core.method.EncryptMethod;
 import com.baislsl.ideaplugin.encryptor.ui.DetectConfirmDialog;
@@ -63,9 +63,8 @@ public class FileOpenDetector implements ProjectComponent {
     }
 
     private void openDecryptWindow(EncryptMethod method, Project project, Document document) {
-        DecryptAction action = new DecryptAction();
-        action.setDocument(document);
-        action.setProject(project);
-        action.accept(method);
+        DecryptExecutor executor = new DecryptExecutor(project, document);
+        executor.setMethod(method);
+        executor.conduct();
     }
 }

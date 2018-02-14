@@ -1,18 +1,16 @@
 package com.baislsl.ideaplugin.encryptor.action;
 
-import com.baislsl.ideaplugin.encryptor.core.EncryptManager;
+import com.baislsl.ideaplugin.encryptor.core.DecryptExecutor;
 
-import com.intellij.openapi.command.WriteCommandAction;
+import com.intellij.openapi.actionSystem.AnAction;
+import com.intellij.openapi.actionSystem.AnActionEvent;
+import com.intellij.openapi.actionSystem.PlatformDataKeys;
 
 
-public class DecryptAction extends BaseTransferAction {
+public class DecryptAction extends AnAction {
     @Override
-    protected void conductTransfer() {
-        EncryptManager encryptManager = new EncryptManager();
-        encryptManager.setEncodeMethod(method);
-        encryptManager.setKey(key);
-        String text = encryptManager.decode(document.getText());
-        WriteCommandAction.runWriteCommandAction(project, () -> document.setText(text));
-
+    public void actionPerformed(AnActionEvent e) {
+        new DecryptExecutor(e.getProject(), e.getData(PlatformDataKeys.EDITOR).getDocument())
+                .conduct();
     }
 }

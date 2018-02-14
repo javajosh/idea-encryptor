@@ -1,6 +1,8 @@
 package com.baislsl.ideaplugin.encryptor.core;
 
 import com.baislsl.ideaplugin.encryptor.core.method.EncryptMethod;
+import com.baislsl.ideaplugin.encryptor.core.method.Encryptor;
+import com.baislsl.ideaplugin.encryptor.ui.KeyLegalDetector;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.Arrays;
@@ -8,7 +10,7 @@ import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
 
-public class EncryptManager {
+public class EncryptManager implements KeyLegalDetector {
     private String key;
     private EncryptMethod method;
     private static List<Encryptor> encryptors;
@@ -57,4 +59,8 @@ public class EncryptManager {
         return null;
     }
 
+    @Override
+    public boolean isLegalKey(String key) {
+        return detect(key) != null;
+    }
 }

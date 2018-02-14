@@ -23,7 +23,9 @@ public class DetectConfirmDialog extends DialogWrapper {
     @Nullable
     @Override
     protected JComponent createCenterPanel() {
-        return new JTextArea(information);
+        JTextPane pane = new JTextPane();
+        pane.setText(information);
+        return pane;
     }
 
     @NotNull
