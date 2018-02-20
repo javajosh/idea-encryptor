@@ -1,10 +1,10 @@
 package com.baislsl.ideaplugin.encryptor.core.method;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+
+import com.intellij.openapi.diagnostic.Logger;
 
 public class NativeEncryptor implements Encryptor {
-    private final static Logger LOG = LoggerFactory.getLogger(NativeEncryptor.class);
+    private final static Logger LOG = Logger.getInstance(NativeEncryptor.class);
     private final static String HEADER = "baislsl";
 
     @Override

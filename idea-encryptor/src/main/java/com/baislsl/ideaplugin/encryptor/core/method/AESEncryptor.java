@@ -1,8 +1,7 @@
 package com.baislsl.ideaplugin.encryptor.core.method;
 
+import com.intellij.openapi.diagnostic.Logger;
 import org.apache.commons.net.util.Base64;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import sun.misc.BASE64Encoder;
 
 import javax.crypto.Cipher;
@@ -10,7 +9,7 @@ import javax.crypto.spec.IvParameterSpec;
 import javax.crypto.spec.SecretKeySpec;
 
 public class AESEncryptor implements Encryptor {
-    private final static Logger LOG = LoggerFactory.getLogger(AESEncryptor.class);
+    private final static Logger LOG = Logger.getInstance(AESEncryptor.class);
     private final static String ENCRYPT_VECTOR = "plugin@baislsl--";
     private final static String CIPHER_METHOD = "AES/CBC/PKCS5PADDING";
     private final static String HEADER = ".https://github.com/baislsl@idea-plugin/AES";

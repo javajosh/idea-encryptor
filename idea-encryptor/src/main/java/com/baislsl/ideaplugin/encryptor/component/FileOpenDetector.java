@@ -14,15 +14,15 @@ import com.intellij.openapi.fileEditor.FileEditorManagerListener;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.project.ProjectManager;
 import com.intellij.openapi.vfs.VirtualFile;
+import com.intellij.openapi.diagnostic.Logger;
 import com.intellij.util.messages.MessageBus;
 import com.intellij.util.messages.MessageBusConnection;
 import org.jetbrains.annotations.NotNull;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+
 
 
 public class FileOpenDetector implements ProjectComponent {
-    private final static Logger LOG = LoggerFactory.getLogger(FileOpenDetector.class);
+    private final static Logger LOG = Logger.getInstance(FileOpenDetector.class);
     private MessageBusConnection connection;
     private static EncryptManager manager = new EncryptManager();
     private DecryptExecutor executor;

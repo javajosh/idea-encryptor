@@ -2,12 +2,11 @@ package com.baislsl.ideaplugin.encryptor.ui;
 
 import com.baislsl.ideaplugin.encryptor.core.EncryptManager;
 import com.intellij.openapi.command.WriteCommandAction;
+import com.intellij.openapi.diagnostic.Logger;
 import com.intellij.openapi.editor.event.DocumentEvent;
 import com.intellij.openapi.editor.event.DocumentListener;
 import com.intellij.openapi.project.ProjectManager;
 import com.intellij.ui.EditorTextField;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import javax.swing.*;
 import java.awt.*;
@@ -15,7 +14,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class ToolKitCore extends JComponent implements ActionListener, DocumentListener {
-    private final static Logger LOG = LoggerFactory.getLogger(ToolKitCore.class);
+    private final static Logger LOG = Logger.getInstance(ToolKitCore.class);
     private EditorTextField plaintextField;
     private EditorTextField ciphertextField;
     private boolean isEncrypt;
@@ -88,13 +87,13 @@ public class ToolKitCore extends JComponent implements ActionListener, DocumentL
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        LOG.info(e.toString());
+        LOG.debug(e.toString());
         flesh();
     }
 
     @Override
     public void documentChanged(DocumentEvent event) {
-        LOG.info(event.toString());
+        LOG.debug(event.toString());
         flesh();
     }
 

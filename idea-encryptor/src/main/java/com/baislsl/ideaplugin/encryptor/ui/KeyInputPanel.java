@@ -1,11 +1,9 @@
 package com.baislsl.ideaplugin.encryptor.ui;
 
+import com.intellij.openapi.diagnostic.Logger;
 import com.intellij.ui.JBColor;
 import com.intellij.ui.components.JBPasswordField;
 import com.intellij.ui.components.JBTextField;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import javax.swing.*;
 import javax.swing.text.Style;
 import javax.swing.text.StyleConstants;
@@ -14,7 +12,7 @@ import java.awt.*;
 import java.awt.event.*;
 
 public class KeyInputPanel extends JComponent implements ActionListener {
-    private final static Logger LOG = LoggerFactory.getLogger(KeyInputPanel.class);
+    private final static Logger LOG = Logger.getInstance(KeyInputPanel.class);
     private final static KeyLegalDetector defaultDetector = s -> true;
     private final static Color LEGAL_COLOR = JBColor.WHITE;
     private final static Color ILLEGAL_COLOR = JBColor.RED;
