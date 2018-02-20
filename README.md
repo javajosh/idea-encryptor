@@ -1,5 +1,8 @@
 ## Encrypt tool plugin for IntelliJ 
 
-### TODO
-- 窗口加密特定的输入文本
-- 加密选中的文本
+### Feature
+
+- Encrypt or decrypt the whole file.
+- Encrypt or decrypt the selected text. 
+- Open tool kit wilndows to encrypt. 
+- Detect file encrypted by this tool on opening file. 
