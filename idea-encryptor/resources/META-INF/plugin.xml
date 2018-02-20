@@ -64,8 +64,8 @@
             <reference ref="com.baislsl.ideaplugin.encryptor.action.DecryptSelectedAction"/>
         </group>
 
-        <action id="ToolKit" class="com.baislsl.ideaplugin.encryptor.action.ToolKit" text="ToolKit"
-                description="ToolKit">
+        <action id="Encrypt ToolKit" class="com.baislsl.ideaplugin.encryptor.action.ToolKit" text="Encrypt ToolKit"
+                description="Encrypt ToolKit">
             <add-to-group group-id="ToolsMenu" anchor="first"/>
         </action>
     </actions>
