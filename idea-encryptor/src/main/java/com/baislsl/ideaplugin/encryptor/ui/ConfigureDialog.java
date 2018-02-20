@@ -61,6 +61,7 @@ public class ConfigureDialog extends DialogWrapper {
             keyInputPanel = new KeyInputPanel(this);
             this.add(methodPanel);
             this.add(keyInputPanel);
+            methodPanel.addActionListener(keyInputPanel);
         }
 
         public EncryptMethod getMethod() {

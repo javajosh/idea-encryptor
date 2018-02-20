@@ -6,6 +6,8 @@ import com.intellij.openapi.editor.event.DocumentEvent;
 import com.intellij.openapi.editor.event.DocumentListener;
 import com.intellij.openapi.project.ProjectManager;
 import com.intellij.ui.EditorTextField;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import javax.swing.*;
 import java.awt.*;
@@ -13,6 +15,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class ToolKitCore extends JComponent implements ActionListener, DocumentListener {
+    private final static Logger LOG = LoggerFactory.getLogger(ToolKitCore.class);
     private EditorTextField plaintextField;
     private EditorTextField ciphertextField;
     private boolean isEncrypt;
@@ -33,10 +36,11 @@ public class ToolKitCore extends JComponent implements ActionListener, DocumentL
         plaintextField = new EditorTextField();
         ciphertextField = new EditorTextField();
         methodPanel = new MethodPanel();
-        keyInputPanel = new KeyInputPanel();
+        keyInputPanel = new KeyInputPanel(manager);
         plaintextField.addDocumentListener(this);
         ciphertextField.addDocumentListener(this);
         methodPanel.addActionListener(this);
+        methodPanel.addActionListener(keyInputPanel);
         keyInputPanel.addActionListener(this);
 
         plaintextField.setPreferredWidth(200);
@@ -84,11 +88,13 @@ public class ToolKitCore extends JComponent implements ActionListener, DocumentL
 
     @Override
     public void actionPerformed(ActionEvent e) {
+        LOG.info(e.toString());
         flesh();
     }
 
     @Override
     public void documentChanged(DocumentEvent event) {
+        LOG.info(event.toString());
         flesh();
     }
 

@@ -22,7 +22,7 @@ public class EncryptManager implements KeyLegalDetector {
     }
 
     public EncryptManager() {
-        this.method = EncryptMethod.AES;
+        this.method = EncryptMethod.NAIVE;
     }
 
     public boolean setKey(String key) {
@@ -61,6 +61,6 @@ public class EncryptManager implements KeyLegalDetector {
 
     @Override
     public boolean isLegalKey(String key) {
-        return method.getNewInstance().isLegalKey(key);
+        return getEncoder().isLegalKey(key);
     }
 }
