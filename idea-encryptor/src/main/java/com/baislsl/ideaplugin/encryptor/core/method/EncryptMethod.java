@@ -4,7 +4,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 public enum EncryptMethod {
-    NAIVE(NativeEncryptor.class, ""),
     AES(AESEncryptor.class, "Must be 16 words");
 
 

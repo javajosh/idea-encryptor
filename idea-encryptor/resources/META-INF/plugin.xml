@@ -1,28 +1,29 @@
 <idea-plugin>
     <id>com.baislsl.ideaplugin.encryptor</id>
-    <name>Baislsl</name>
+    <name>Encrypt Tool</name>
     <version>1.0</version>
     <vendor email="baislsl666@gmail.com" url="https://github.com/baislsl">baislsl</vendor>
 
     <description><![CDATA[
-      Enter short description for your plugin here.<br>
-      <em>most HTML tags may be used</em>
+    <h1>Encrypt tools<h1>
+      <br>
+      <b> Features</b>
+      <ul>
+        <li>Encrypt or decrypt the whole file. </li>
+        <li>Encrypt or decrypt the selected text. </li>
+        <li>Open tool kit wilndows to encrypt. </li>
+      </ul>
+      <a href="https://github.com/baislsl/idea-encryptor">github</a>
     ]]></description>
 
     <change-notes><![CDATA[
-      Add change notes here.<br>
-      <em>most HTML tags may be used</em>
+      First release<br>
     ]]>
     </change-notes>
 
     <!-- please see http://www.jetbrains.org/intellij/sdk/docs/basics/getting_started/build_number_ranges.html for description -->
     <idea-version since-build="173.0"/>
 
-    <!-- please see http://www.jetbrains.org/intellij/sdk/docs/basics/getting_started/plugin_compatibility.html
-         on how to target different products -->
-    <!-- uncomment to enable plugin in all products
-    <depends>com.intellij.modules.lang</depends>
-    -->
 
     <project-components>
         <component>
