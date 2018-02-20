@@ -32,7 +32,7 @@ public class KeyInputPanel extends JComponent implements ActionListener {
         passwordField = new JBPasswordField();
         hintText = new JTextPane();
         hintText.setEnabled(false);
-        hintText.setText(HINT);
+        hintText.setText(getHint());
         this.add(hintText);
         this.add(passwordField);
         this.setPreferredSize(new Dimension(200, 100));
@@ -53,15 +53,19 @@ public class KeyInputPanel extends JComponent implements ActionListener {
         return new String(passwordField.getPassword());
     }
 
+    private String getHint() {
+        return detector.getHint() == null ? HINT : detector.getHint();
+    }
+
     @Override
     public void actionPerformed(ActionEvent e) {
         LOG.info("password test changed.");
         if (detector.isLegalKey(getPassword())) {
             hintText.setForeground(LEGAL_COLOR);
-            hintText.setText(HINT + "legal");
+            hintText.setText(getHint() + "--legal");
         } else {
             hintText.setForeground(ILLEGAL_COLOR);
-            hintText.setText(HINT + "illegal");
+            hintText.setText(getHint() + "--illegal");
         }
 
     }

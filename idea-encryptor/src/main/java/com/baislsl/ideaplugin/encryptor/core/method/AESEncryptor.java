@@ -4,6 +4,7 @@ import com.intellij.openapi.diagnostic.Logger;
 import org.apache.commons.net.util.Base64;
 import sun.misc.BASE64Encoder;
 
+import javax.annotation.Nullable;
 import javax.crypto.Cipher;
 import javax.crypto.spec.IvParameterSpec;
 import javax.crypto.spec.SecretKeySpec;
@@ -13,6 +14,7 @@ public class AESEncryptor implements Encryptor {
     private final static String ENCRYPT_VECTOR = "plugin@baislsl--";
     private final static String CIPHER_METHOD = "AES/CBC/PKCS5PADDING";
     private final static String HEADER = ".https://github.com/baislsl@idea-plugin/AES";
+    private final static String HINT = "Length of password must be 16";
 
     @Override
     public String encode(String plaintext, String key) {
@@ -61,5 +63,11 @@ public class AESEncryptor implements Encryptor {
     @Override
     public boolean isLegalKey(String key) {
         return key != null && key.length() == 16;
+    }
+
+    @Override
+    @Nullable
+    public String getHint() {
+        return HINT;
     }
 }

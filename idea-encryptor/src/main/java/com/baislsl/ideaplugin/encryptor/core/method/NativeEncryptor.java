@@ -2,10 +2,12 @@ package com.baislsl.ideaplugin.encryptor.core.method;
 
 
 import com.intellij.openapi.diagnostic.Logger;
+import org.jetbrains.annotations.Nullable;
 
 public class NativeEncryptor implements Encryptor {
     private final static Logger LOG = Logger.getInstance(NativeEncryptor.class);
     private final static String HEADER = "baislsl";
+    private final static String HINT = null;
 
     @Override
     public boolean detect(String ciphertext) {

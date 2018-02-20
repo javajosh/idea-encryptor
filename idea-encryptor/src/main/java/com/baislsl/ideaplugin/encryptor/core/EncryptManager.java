@@ -63,4 +63,10 @@ public class EncryptManager implements KeyLegalDetector {
     public boolean isLegalKey(String key) {
         return getEncoder().isLegalKey(key);
     }
+
+    @Nullable
+    @Override
+    public String getHint() {
+        return getEncoder().getHint();
+    }
 }

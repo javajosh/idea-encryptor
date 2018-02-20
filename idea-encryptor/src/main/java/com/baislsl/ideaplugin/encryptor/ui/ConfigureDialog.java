@@ -81,6 +81,13 @@ public class ConfigureDialog extends DialogWrapper {
             manager.setEncodeMethod(getMethod());
             return manager.isLegalKey(key);
         }
+
+        @Nullable
+        @Override
+        public String getHint() {
+            manager.setEncodeMethod(getMethod());
+            return manager.getHint();
+        }
     }
 
 
