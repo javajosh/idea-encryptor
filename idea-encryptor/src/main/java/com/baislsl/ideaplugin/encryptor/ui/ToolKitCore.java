@@ -1,8 +1,10 @@
 package com.baislsl.ideaplugin.encryptor.ui;
 
 import com.baislsl.ideaplugin.encryptor.core.EncryptManager;
+import com.intellij.openapi.command.WriteCommandAction;
 import com.intellij.openapi.editor.event.DocumentEvent;
 import com.intellij.openapi.editor.event.DocumentListener;
+import com.intellij.openapi.project.ProjectManager;
 import com.intellij.ui.EditorTextField;
 
 import javax.swing.*;
@@ -23,6 +25,7 @@ public class ToolKitCore extends JComponent implements ActionListener, DocumentL
         @Override
         public void actionPerformed(ActionEvent e) {
             isEncrypt = "encrypt".equals(e.getActionCommand());
+            ToolKitCore.this.actionPerformed(e);
         }
     };
 
@@ -36,6 +39,9 @@ public class ToolKitCore extends JComponent implements ActionListener, DocumentL
         methodPanel.addActionListener(this);
         keyInputPanel.addActionListener(this);
 
+        plaintextField.setPreferredWidth(200);
+        ciphertextField.setPreferredWidth(200);
+        ciphertextField.setEnabled(false);
 
         ButtonGroup group = new ButtonGroup();
         JRadioButton encryptButton = new JRadioButton("encrypt");
@@ -53,18 +59,26 @@ public class ToolKitCore extends JComponent implements ActionListener, DocumentL
         methodSwitchPanel.add(encryptButton);
         methodSwitchPanel.add(decryptButton);
 
-        this.add(plaintextField);
-        this.add(ciphertextField);
-        this.add(methodPanel);
-        this.add(keyInputPanel);
-        this.add(methodSwitchPanel);
 
-        this.setSize(new Dimension(600, 400));
-        plaintextField.setBounds(0, 0, 200, 200);
-        methodPanel.setBounds(220, 0, 70, 80);
-        methodSwitchPanel.setBounds(310, 0, 70, 80);
-        keyInputPanel.setBounds(220, 100, 160, 60);
-        ciphertextField.setBounds(400, 0, 200, 200);
+        this.setLayout(new GridLayout(1, 3));
+
+        JPanel configurePanel = new JPanel();
+        configurePanel.setLayout(new GridLayout(2, 1));
+
+        this.add(plaintextField);
+        this.add(configurePanel);
+        this.add(ciphertextField);
+
+        JPanel panel = new JPanel();
+        panel.setLayout(new FlowLayout());
+        panel.add(methodPanel);
+        panel.add(methodSwitchPanel);
+
+        configurePanel.add(panel);
+        configurePanel.add(keyInputPanel);
+
+        this.setPreferredSize(new Dimension(600, 200));
+
     }
 
 
@@ -85,8 +99,8 @@ public class ToolKitCore extends JComponent implements ActionListener, DocumentL
             String result = isEncrypt ? manager.encode(plaintextField.getText())
                                       : manager.decode(plaintextField.getText());
             if(!result.equals(ciphertextField.getText())) {
-                // TODO: use WriteCommandAction.runWriteCommandAction instead
-                SwingUtilities.invokeLater(
+                WriteCommandAction.runWriteCommandAction(
+                        ProjectManager.getInstance().getDefaultProject(),
                         () -> ciphertextField.setText(result)
                 );
             }
